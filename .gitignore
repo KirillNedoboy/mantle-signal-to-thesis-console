@@ -1,0 +1,10 @@
+node_modules
+.next
+out
+.env
+.env.*
+!.env.example
+data/store/events.jsonl
+coverage
+tsconfig.tsbuildinfo
+.DS_Store

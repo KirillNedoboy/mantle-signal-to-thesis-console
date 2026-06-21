@@ -1,0 +1,36 @@
+{
+  "name": "mantle-signal-to-thesis-console",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@10.14.0",
+  "type": "module",
+  "description": "Self-hosted AI research console that turns Web3 scanner outputs into structured Mantle ecosystem research objects.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "demo:seed": "tsx src/cli/seedDemo.ts",
+    "demo:agent-run": "tsx src/cli/runDemoAgent.ts",
+    "import:fastdex": "tsx src/cli/importFastDexJsonl.ts"
+  },
+  "dependencies": {
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "zod": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "tsx": "latest",
+    "typescript": "latest",
+    "vitest": "latest"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
