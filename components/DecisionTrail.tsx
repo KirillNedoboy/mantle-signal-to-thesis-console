@@ -7,7 +7,7 @@ export function DecisionTrail({ decisions }: { decisions: Decision[] }) {
   return (
     <div className="stack">
       {decisions.map((decision) => (
-        <div className="card" key={decision.id}>
+        <div className="timeline-item" key={decision.id}>
           <div className="row">
             <Badge>{decision.actor}</Badge>
             <Badge tone={decision.decision === "ESCALATE" ? "good" : decision.decision === "WATCH" ? "warn" : "bad"}>{decision.decision}</Badge>

@@ -5,7 +5,7 @@ export function ResearchNoteCard({ note }: { note?: ResearchNote }) {
   if (!note) return <p className="muted">No research note generated yet. Run `pnpm demo:agent-run`.</p>;
 
   return (
-    <div className="card stack">
+    <div className="research-note stack">
       <div className="row">
         <Badge tone="bad">{note.disclaimer}</Badge>
         <Badge tone={note.suggestedDecision === "ESCALATE" ? "good" : note.suggestedDecision === "WATCH" ? "warn" : "bad"}>{note.suggestedDecision}</Badge>

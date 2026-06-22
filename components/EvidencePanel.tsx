@@ -7,7 +7,7 @@ export function EvidencePanel({ evidence }: { evidence: Evidence[] }) {
   return (
     <div className="stack">
       {evidence.map((item) => (
-        <div className="card" key={item.id}>
+        <div className="sub-card" key={item.id}>
           <div className="row">
             <Badge>{item.kind}</Badge>
             <Badge tone={item.confidence === "high" ? "good" : item.confidence === "medium" ? "warn" : "bad"}>{item.confidence}</Badge>
