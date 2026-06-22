@@ -1,64 +1,92 @@
 # Mantle Signal-to-Thesis Console
 
-Self-hosted AI research console for the Mantle Research Challenge.
+Self-hosted research operations console for the Mantle Research Challenge.
 
-It turns autonomous Web3 scanner outputs into structured research objects:
+The project turns noisy Web3 scanner output into structured research intelligence:
 
 ```txt
-raw signal -> evidence -> risk flags -> Mantle relevance -> research note -> human decision trail
+raw signal -> evidence -> risk flags -> Mantle relevance -> AI thesis -> human decision trail
 ```
 
-This repository is intentionally **read-only / watch-only**:
+It is built for a hackathon judge or reviewer to inspect the full loop in minutes:
 
-- no auto-buy
-- no private keys
-- no wallet connection
-- no trade execution
-- no Telegram live sending
-- no mutation of existing Hermes / Fast DEX production runtime
+- open the dashboard
+- review seeded demo signals
+- inspect evidence and risk flags
+- read the generated research note
+- verify that decisions remain human-confirmed
 
-## Why this exists
+## What Problem It Solves
 
-Early Web3 signals are fragmented across DEX feeds, on-chain activity, social posts, ecosystem news, and private research notes. The hard part is not seeing one more token; the hard part is turning noisy signals into a durable research trail.
+Early Web3 signals are fragmented across scanner alerts, DEX feeds, ecosystem news, social context, and private notes. The hard part is not seeing another alert. The hard part is turning a noisy alert into a durable research object that a team can review, challenge, and revisit.
 
-This project packages an existing AI scanner contour into a clean hackathon-ready product layer:
+Mantle Signal-to-Thesis Console addresses that workflow gap. It keeps the agent focused on research operations:
 
-- append-only agent event journal
-- typed data contract
-- deterministic risk / relevance scoring
-- research note generation
-- dashboard for judges and operators
+- preserve raw signal context
+- attach evidence
+- identify missing data and risk flags
+- classify Mantle relevance
+- generate a thesis and next manual checks
+- record a human decision trail
 
-## Mantle alignment
+## Why It Fits Mantle Research Challenge
 
-The console is framed for Mantle ecosystem research:
+This is a Research Agent track submission because the agent does not execute transactions or produce chat-only summaries. It writes validated events into an append-only store, and the dashboard renders the materialized research state.
+
+Mantle alignment:
 
 - ecosystem scouting
-- research workflow automation
-- RWA / tokenized assets / AI-native finance / DeFi liquidity narratives
-- repeatable agent workflow for Track 2-style submissions
+- RWA and tokenized asset research workflows
+- AI-native finance and prediction-market research
+- DeFi liquidity and emerging protocol review
+- repeatable open-source agent workflow for judges and operators
 
-It does **not** claim that every imported signal is Mantle-native. Instead, each signal receives an explicit `mantleRelevance` classification.
+The project does not claim every imported signal is Mantle-native. Each signal receives an explicit `mantleRelevance` classification so reviewers can separate direct Mantle signals from broader ecosystem scouting.
 
-## Architecture
+## Agent Loop
 
 ```txt
-Scanner output / demo fixture
+Demo fixture / scanner export
         |
         v
 Validated AgentEvent
         |
         v
-Append-only JSONL journal
+Append-only JSONL event store
         |
         v
 Materialized research state
         |
         v
-Dashboard + Research Notes + Decision Trail
+Dashboard: inbox, evidence, risk flags, thesis, decision trail
 ```
 
-## Quick start
+The agent writes events such as:
+
+- `signal_detected`
+- `evidence_added`
+- `score_updated`
+- `research_note_created`
+- `decision_recorded`
+
+The dashboard does not edit scanner output directly. It only renders materialized state from the event store.
+
+## Safety Boundaries
+
+This repository is intentionally read-only and watch-only:
+
+- no wallet connection
+- no private keys
+- no transaction signing
+- no buy/sell/trade buttons
+- no automated execution
+- no Telegram live sender
+- no cron jobs
+- no mutation of production Hermes or Fast DEX runtime
+
+A signal is not financial advice and not an execution instruction. Missing data is treated as risk, not safety.
+
+## Quick Start
 
 ```bash
 pnpm install
@@ -66,28 +94,39 @@ pnpm demo:seed
 pnpm demo:agent-run
 pnpm test
 pnpm typecheck
-pnpm dev
+pnpm build
+pnpm dev -- --hostname 127.0.0.1 --port 3100
 ```
 
-Then open:
+Open:
 
 ```txt
-http://localhost:3000
+http://127.0.0.1:3100/
+http://127.0.0.1:3100/signals
+http://127.0.0.1:3100/signals/signal_mantle_spcxx_demo01
 ```
 
-## Main commands
+## Main Commands
 
 ```bash
 pnpm demo:seed          # writes deterministic demo signals into data/store/events.jsonl
-pnpm demo:agent-run     # appends deterministic AI research notes and suggested decisions
+pnpm demo:agent-run     # appends deterministic research notes and suggested decisions
 pnpm import:fastdex -- --input ./demo/fixtures/fast-dex-sample.jsonl
 pnpm test
 pnpm typecheck
 pnpm build
-pnpm dev
+pnpm dev -- --hostname 127.0.0.1 --port 3100
 ```
 
-## Data model
+## Demo Walkthrough
+
+1. Open the homepage and explain the loop: raw signal -> evidence -> risk flags -> thesis -> human decision.
+2. Open Signal Inbox and show that four demo signals are materialized from append-only events.
+3. Open a signal detail page.
+4. Walk through Evidence, Risk Flags, Mantle Relevance, AI Research Note, and Decision Trail.
+5. Emphasize that the system is a research console only, not a trading or wallet system.
+
+## Data Model
 
 Core objects:
 
@@ -97,20 +136,13 @@ Core objects:
 - `Decision`
 - `AgentEvent`
 
-Every dashboard update comes from an append-only event. The dashboard does not edit scanner output directly.
+The data contract is typed with Zod schemas, event persistence is JSONL, and the UI renders materialized state from those events.
 
-## Demo story
+## Submission Docs
 
-1. Seed demo signals.
-2. Run the agent note generator.
-3. Open the dashboard.
-4. Show Signal Inbox.
-5. Open a signal detail page.
-6. Explain evidence, risk flags, Mantle relevance, generated thesis and decision trail.
-7. Emphasize: this is not a buy signal; it is a research workflow.
-
-## Safety position
-
-A Fast DEX alert is not a buy signal. It is only an object for urgent manual review.
-
-The project does not give execution instructions and does not automate trades. Missing data is treated as risk, not as safety.
+- [Demo script](docs/demo-script.md)
+- [Submission summary](docs/submission-summary.md)
+- [X thread draft](docs/x-thread-draft.md)
+- [Screenshots checklist](docs/screenshots-checklist.md)
+- [Final validation](docs/final-validation.md)
+- [Safety and non-goals](docs/safety-and-non-goals.md)
