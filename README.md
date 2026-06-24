@@ -23,7 +23,9 @@ It is built for a hackathon judge or reviewer to inspect the full loop in minute
 - **Sample signal**: http://138.124.108.146:3100/signals/signal_mantle_spcxx_demo01
 - **Screenshots**: see `assets/screenshots/{home,inbox,detail,decision-trail}.png`
 
-The 50-second desktop walkthrough: title card → terminal agent run → dashboard (4 signals) → signal detail (EVIDENCE 4, Mantle docs auto-citation) → decision trail → final end-card "Research only. No wallet. No execution."
+The 50-second desktop walkthrough: title card → terminal agent run → dashboard (4 signals) → signal detail (Mantle evidence + optional Mantle docs citation when the optional `mantle-agent-skill` is present) → decision trail → final end-card "Research only. No wallet. No execution."
+
+> **Reproducibility:** see [docs/README-for-judges.md](docs/README-for-judges.md) for a 60-second local run, exact validation commands, and an honest list of limitations (JSONL store = single-process, Mantle docs = optional skill, no cross-process locking).
 
 ## What Problem It Solves
 
@@ -95,10 +97,18 @@ This repository is intentionally read-only and watch-only:
 
 A signal is not financial advice and not an execution instruction. Missing data is treated as risk, not safety.
 
+### Mantle docs integration
+
+Citations from `docs.mantle.xyz` are produced by the optional `mantle-agent-skill` Hermes skill (`src/skills/mantleDocsSkill.ts`). When the skill is not installed on the host, the agent loop returns `status: "MCP_UNAVAILABLE"` and continues without citations. The demo, tests, and build do not require the skill. See the [judges' quickstart](docs/README-for-judges.md#mcp-unavailable) for details.
+
+### JSONL store
+
+`src/store/eventStore.ts` is optimized for the single-process demo. It reads the existing file at most once per batch and dedups eventIds in memory. **There is no cross-process file locking.** Running multiple `pnpm demo:*` processes in parallel against the same store can race. This is documented in the code and in the judges' quickstart.
+
 ## Quick Start
 
 ```bash
-pnpm install
+pnpm install --frozen-lockfile
 pnpm demo:seed
 pnpm demo:agent-run
 pnpm test
@@ -106,6 +116,8 @@ pnpm typecheck
 pnpm build
 pnpm dev -- --hostname 127.0.0.1 --port 3100
 ```
+
+`pnpm install --frozen-lockfile` is the exact CI command and guarantees a reproducible install against the committed lockfile. See [docs/README-for-judges.md](docs/README-for-judges.md) for the full judge-friendly quickstart.
 
 Open:
 
@@ -118,6 +130,7 @@ http://127.0.0.1:3100/signals/signal_mantle_spcxx_demo01
 ## Main Commands
 
 ```bash
+pnpm install --frozen-lockfile   # reproducible install (matches CI)
 pnpm demo:seed          # writes deterministic demo signals into data/store/events.jsonl
 pnpm demo:agent-run     # appends deterministic research notes and suggested decisions
 pnpm import:fastdex -- --input ./demo/fixtures/fast-dex-sample.jsonl
@@ -149,6 +162,7 @@ The data contract is typed with Zod schemas, event persistence is JSONL, and the
 
 ## Submission Docs
 
+- **[Judges' quickstart](docs/README-for-judges.md)** — 60-second local run, validation commands, mock-vs-real breakdown, MCP fallback.
 - [Demo script](docs/demo-script.md)
 - [Submission summary](docs/submission-summary.md)
 - [X thread draft](docs/x-thread-draft.md)
