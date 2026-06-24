@@ -16,6 +16,14 @@ It is built for a hackathon judge or reviewer to inspect the full loop in minute
 - read the generated research note
 - verify that decisions remain human-confirmed
 
+## Live Demo
+
+- **Live URL**: http://138.124.108.146:3100/
+- **Demo video (60s)**: https://raw.githubusercontent.com/KirillNedoboy/mantle-signal-to-thesis-console/main/assets/video/mantle-demo.mp4
+- **Sample signal**: http://138.124.108.146:3100/signals/signal_mantle_spcxx_demo01
+
+The 60-second walkthrough covers: title card → signal inbox → detail page with EVIDENCE 4 → Mantle docs auto-citation → decision trail → final verdicts (WATCH / NO_ACTION / NO_BUY).
+
 ## What Problem It Solves
 
 Early Web3 signals are fragmented across scanner alerts, DEX feeds, ecosystem news, social context, and private notes. The hard part is not seeing another alert. The hard part is turning a noisy alert into a durable research object that a team can review, challenge, and revisit.
