@@ -88,6 +88,31 @@ Reusable pieces:
 - dashboard panels for signal inbox, evidence, risk flags, research note, and decision trail
 - documentation and demo script for reviewers
 
+## Mantle AI Agent Skills (bonus)
+
+The project is wired to the **official Mantle Network MCP server** at
+`https://docs.mantle.xyz/network/~gitbook/mcp`, which is the canonical
+"AI Agent Skills" surface exposed by Mantle documentation.
+
+`pnpm demo:agent-run` calls the Mantle MCP `searchDocumentation` tool for
+every demo signal, picks the best matching docs page, and writes an
+`evidence_added` event with `kind="mantle_relevance"`, `confidence="high"`,
+and a real `sourceRef` URL like
+`https://docs.mantle.xyz/network/for-developers/common-use-cases/moving-assets-and-data`.
+
+The dashboard then surfaces that Mantle-docs citation inside the Evidence
+Review section and appends a short reference line to the AI Research Note
+thesis. A judge can verify the integration end-to-end by:
+
+1. running `pnpm demo:agent-run`,
+2. opening `/signals/signal_mantle_spcxx_demo01`,
+3. seeing a new "Mantle docs: …" evidence card and a thesis ending with
+   a real `docs.mantle.xyz/network/...` URL.
+
+The Python client that talks to Mantle MCP lives in the Hermes skill
+`web3/mantle-agent-skill/scripts/mantle_mcp_client.py` and is included as
+a runtime dep of the agent loop (no API keys, no auth, no rate limits).
+
 ## Safety and Non-Goals
 
 This repository is research-only:

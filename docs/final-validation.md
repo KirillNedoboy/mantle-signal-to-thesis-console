@@ -34,6 +34,10 @@ Expected:
 
 - deterministic research notes and suggested decisions are appended when missing
 - repeated runs do not create duplicate demo notes
+- a Mantle MCP `searchDocumentation` call is made per signal, and one
+  `evidence_added` event per signal is appended with `agent="mantle-docs-skill"`
+  and a real `sourceRef` URL on `https://docs.mantle.xyz/network/...`
+- the run log line shows `mantle_docs_evidence_added=4` for the demo set
 
 ## Test
 
