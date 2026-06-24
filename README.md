@@ -19,10 +19,10 @@ It is built for a hackathon judge or reviewer to inspect the full loop in minute
 ## Live Demo
 
 - **Live URL**: http://138.124.108.146:3100/
-- **Demo video (75s, 16:9)**: https://raw.githubusercontent.com/KirillNedoboy/mantle-signal-to-thesis-console/main/assets/video/mantle-demo.mp4
+- **Demo video (50s, 16:9)**: https://raw.githubusercontent.com/KirillNedoboy/mantle-signal-to-thesis-console/main/assets/video/mantle-demo.mp4
 - **Sample signal**: http://138.124.108.146:3100/signals/signal_mantle_spcxx_demo01
 
-The 75-second desktop walkthrough covers: title card → terminal agent run (`pnpm demo:seed` + `pnpm demo:agent-run`) → homepage metrics → signal inbox (4 candidates) → signal detail (EVIDENCE 4, Mantle docs auto-citation) → decision trail → final verdicts (WATCH / NO_ACTION / REJECT).
+The 50-second desktop walkthrough: title card → terminal agent run → dashboard (4 signals) → signal detail (EVIDENCE 4, Mantle docs auto-citation) → decision trail → final end-card "Research only. No wallet. No execution."
 
 ## What Problem It Solves
 
