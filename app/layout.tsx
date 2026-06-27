@@ -3,8 +3,9 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Mantle Signal-to-Thesis Console",
-  description: "Self-hosted AI research console for structured Web3 ecosystem signal review.",
+  title: "Signal-to-Thesis Console",
+  description:
+    "Self-hosted AI research console for structured Web3 signal review across multiple research surfaces.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -16,6 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Link className="brand" href="/">Signal-to-Thesis</Link>
             <div className="nav-links">
               <Link href="/signals">Signals</Link>
+              <Link href="/degen">Degen Radar</Link>
               <a href="https://www.mantle.xyz" target="_blank" rel="noreferrer">Mantle</a>
             </div>
           </nav>

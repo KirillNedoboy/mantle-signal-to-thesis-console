@@ -14,11 +14,11 @@ export default function SignalsPage() {
     <div className="operator-layout">
       <aside className="sidebar-panel">
         <div>
-          <span className="eyebrow">Research ops</span>
+          <span className="eyebrow">Mantle research surface</span>
           <h1>Signal Inbox</h1>
           <p className="muted">
-            Every row is materialized from append-only agent events. This view is for
-            triage, evidence review, and human decisions only.
+            Every row is materialized from append-only agent events. This Mantle-facing
+            view is for triage, evidence review, and human decisions only.
           </p>
         </div>
         <div className="sidebar-stat">

@@ -1,19 +1,24 @@
 # Mantle Signal-to-Thesis Console
 
-Self-hosted research operations console for the Mantle Research Challenge.
+Self-hosted `Signal-to-Thesis Console`: a research operations workspace for turning noisy Web3 scanner output into structured, reviewable research objects.
 
-The project turns noisy Web3 scanner output into structured research intelligence:
+The current repo exposes two operator surfaces on the same event/materialization engine:
+
+- **Mantle research inbox** — docs-backed, thesis-oriented signals for the Mantle challenge narrative
+- **Degen radar** — faster triage for imported Fast DEX Radar alerts and early-stage setups
+
+Core loop:
 
 ```txt
-raw signal -> evidence -> risk flags -> Mantle relevance -> AI thesis -> human decision trail
+raw signal -> evidence -> risk flags -> thesis -> human decision trail
 ```
 
-It is built for a hackathon judge or reviewer to inspect the full loop in minutes:
+The console is built so a judge, operator, or reviewer can inspect the full loop in minutes:
 
 - open the dashboard
-- review seeded demo signals
+- review materialized signals
 - inspect evidence and risk flags
-- read the generated research note
+- read the generated research note or score breakdown
 - verify that decisions remain human-confirmed
 
 ## Live Demo
@@ -29,20 +34,20 @@ The 50-second desktop walkthrough: title card → terminal agent run → dashboa
 
 ## What Problem It Solves
 
-Early Web3 signals are fragmented across scanner alerts, DEX feeds, ecosystem news, social context, and private notes. The hard part is not seeing another alert. The hard part is turning a noisy alert into a durable research object that a team can review, challenge, and revisit.
+Early Web3 signals are fragmented across scanner alerts, DEX feeds, ecosystem news, social context, and private notes. The hard part is not seeing another alert. The hard part is turning noisy alerts into durable research objects that a team can review, challenge, and revisit.
 
-Mantle Signal-to-Thesis Console addresses that workflow gap. It keeps the agent focused on research operations:
+Signal-to-Thesis Console addresses that workflow gap. It keeps the agent focused on research operations:
 
 - preserve raw signal context
 - attach evidence
 - identify missing data and risk flags
-- classify Mantle relevance
-- generate a thesis and next manual checks
+- classify relevance for the current surface
+- generate a thesis or score rationale with next manual checks
 - record a human decision trail
 
-## Why It Fits Mantle Research Challenge
+## Why Mantle Is Still a First-Class Surface
 
-This is a Research Agent track submission because the agent does not execute transactions or produce chat-only summaries. It writes validated events into an append-only store, and the dashboard renders the materialized research state.
+This repo started as a Mantle Research Challenge submission and still keeps Mantle as a first-class operator surface.
 
 Mantle alignment:
 
@@ -52,7 +57,9 @@ Mantle alignment:
 - DeFi liquidity and emerging protocol review
 - repeatable open-source agent workflow for judges and operators
 
-The project does not claim every imported signal is Mantle-native. Each signal receives an explicit `mantleRelevance` classification so reviewers can separate direct Mantle signals from broader ecosystem scouting.
+The project does not claim every imported signal is Mantle-native. Each signal on the Mantle surface receives an explicit `mantleRelevance` classification so reviewers can separate direct Mantle signals from broader ecosystem scouting.
+
+At the same time, the same event engine can drive other surfaces — currently including Degen Radar for Fast DEX imports.
 
 ## Agent Loop
 
@@ -125,15 +132,17 @@ Open:
 http://127.0.0.1:3100/
 http://127.0.0.1:3100/signals
 http://127.0.0.1:3100/signals/signal_mantle_spcxx_demo01
+http://127.0.0.1:3100/degen
 ```
 
 ## Main Commands
 
 ```bash
 pnpm install --frozen-lockfile   # reproducible install (matches CI)
-pnpm demo:seed          # writes deterministic demo signals into data/store/events.jsonl
-pnpm demo:agent-run     # appends deterministic research notes and suggested decisions
+pnpm demo:seed                   # writes deterministic Mantle-oriented demo signals into data/store/events.jsonl
+pnpm demo:agent-run              # appends deterministic research notes and suggested decisions
 pnpm import:fastdex -- --input ./demo/fixtures/fast-dex-sample.jsonl
+pnpm degen:import                # imports the latest Fast DEX Radar alerts into the shared event store
 pnpm test
 pnpm typecheck
 pnpm build
@@ -142,11 +151,12 @@ pnpm dev -- --hostname 127.0.0.1 --port 3100
 
 ## Demo Walkthrough
 
-1. Open the homepage and explain the loop: raw signal -> evidence -> risk flags -> thesis -> human decision.
-2. Open Signal Inbox and show that four demo signals are materialized from append-only events.
-3. Open a signal detail page.
+1. Open the homepage and explain the shared loop: raw signal -> evidence -> risk flags -> thesis -> human decision.
+2. Open `/signals` and show the Mantle-facing inbox materialized from append-only events.
+3. Open a Mantle signal detail page.
 4. Walk through Evidence, Risk Flags, Mantle Relevance, AI Research Note, and Decision Trail.
-5. Emphasize that the system is a research console only, not a trading or wallet system.
+5. Optionally open `/degen` to show that the same engine can support a faster radar surface for Fast DEX imports.
+6. Emphasize that every surface is research-only, not a trading or wallet system.
 
 ## Data Model
 

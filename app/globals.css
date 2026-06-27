@@ -130,6 +130,11 @@ ul { margin: 8px 0 0; padding-left: 20px; color: var(--muted); line-height: 1.6;
   color: #06111d;
   font-weight: 900;
 }
+.button.secondary {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid rgba(105, 210, 255, 0.38);
+}
 .text-link { color: var(--accent); font-weight: 800; }
 .safety-label, .safety-callout {
   border: 1px solid rgba(255, 143, 143, 0.34);
@@ -300,4 +305,87 @@ pre {
   .nav, .section-heading { align-items: flex-start; flex-direction: column; }
   .hero { padding: 22px; }
   .flow, .metrics-grid, .value-grid, .summary-grid, .signal-meta-grid { grid-template-columns: 1fr; }
+}
+
+/* ---- Degen Radar mode ---- */
+
+.degen-row {
+  grid-template-columns: 1.4fr 2fr;
+}
+
+.degen-symbol {
+  font-weight: 500;
+  font-size: 0.85em;
+  margin-left: 6px;
+}
+
+.degen-meta .meta strong.good { color: #5fd28a; }
+.degen-meta .meta strong.warn { color: #f0a85a; }
+.degen-meta .meta strong.bad { color: #ef6a6a; }
+
+.degen-filters {
+  padding: 18px;
+}
+
+.degen-filters-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) auto;
+  gap: 12px;
+  align-items: end;
+}
+
+.degen-filter-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.degen-filter-field select {
+  background: #071018;
+  color: var(--fg);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 13px;
+}
+
+.degen-filters-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.evidence-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.evidence-item {
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+}
+
+.evidence-item:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.evidence-item p {
+  margin: 4px 0 2px;
+}
+
+.evidence-item small {
+  color: var(--muted);
+}
+
+@media (max-width: 980px) {
+  .degen-filters-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .degen-row { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .degen-filters-grid { grid-template-columns: 1fr; }
 }
